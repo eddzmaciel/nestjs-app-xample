@@ -1,0 +1,16 @@
+** What's Nest.js?
+
+- node js framework
+- builds up on express.js
+- embraces typescrypt, dependecy injection and modularity ("angular for the backend")
+- can be used to build MVC apps or REST or GrapQL APIs (Apollo)
+- enforces clean code and clear project structure by giving you a series of building blocks
+- makes building comples applications easy
+
+  
+
+
+*Controllers:
+    - mid of the app, how you handle the income request, accept the income request, do something and send a response
+*Providers:
+    - extra classes, that we can inject into a controllers to provide a extra functionality
