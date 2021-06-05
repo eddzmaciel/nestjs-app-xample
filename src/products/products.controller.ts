@@ -7,19 +7,21 @@ export class ProductsController {
     constructor(private productsService: ProductsService) { }
 
     @Post()
-    addProduct(
+    //we have to wait for the promise complete
+    async addProduct(
         // @Body() completeBody: { title: string, },
         @Body('title') prodTitle: string,
         @Body('description') prodDescription,
-        @Body('price') prodPrice): any {
-        const generatedId = this.productsService.insertProduct(prodTitle, prodDescription, prodPrice);
+        @Body('price') prodPrice) {
+        const generatedId = await this.productsService.insertProduct(prodTitle, prodDescription, prodPrice);
         return { id: generatedId }
     }
 
 
     @Get()
-    getAllProducts() {
-        return this.productsService.getProducts();
+    async etAllProducts() {
+        const products = await this.productsService.getProducts();
+        return products;
     }
 
     /* 
@@ -33,7 +35,7 @@ export class ProductsController {
 
 
     @Patch(':id')
-    updateProduct(
+    async updateProduct(
         //the param will be passed on the url
         @Param('id') prodId: string,
         //body is going to be passed as a raw json
@@ -41,15 +43,14 @@ export class ProductsController {
         @Body('description') prodDescription: string,
         @Body('price') prodPrice: number) {
 
-        this.productsService.updateProduct(prodId, prodTitle, prodDescription, prodPrice);
-        return null;
-
+        const updatedProduct = await this.productsService.updateProduct(prodId, prodTitle, prodDescription, prodPrice);
+        return updatedProduct;
     }
 
     @Delete(':id')
-    removeProduct(@Param('id') prodId: string) {
-        this.productsService.deleteProduct(prodId);
-        return null;
+    async removeProduct(@Param('id') prodId: string) {
+        const deletedProduct = await this.productsService.deleteProduct(prodId);
+        return deletedProduct;
     }
 
 

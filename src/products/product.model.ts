@@ -1,16 +1,20 @@
 
-export class Product {
-    constructor(public id: string, public title: string, public description: string, public price: number) { }
+import * as mongoose from 'mongoose';
 
-    // id: string;
-    // title: string;
-    // description: string;
-    // price: number;
+export const ProductSchema = new mongoose.Schema(
+    {
+        //data type with JavaScript Type
+        title: { type: String, required: true },
+        description: { type: String, required: true },
+        price: { type: Number, required: true }
+    }
+);
 
-    // constructor(id: string, title: string, description: string, price: number) {
-    //     this.id = id;
-    //     this.title = title;
-    //     this.description = description;
-    //     this.price = price;
-    // }
+//indicated that this interface is based in a mongoose interface
+export interface Product extends mongoose.Document {
+    //data type with TypeScript Type
+    id: string;
+    title: string;
+    description: string;
+    price: number;
 }
